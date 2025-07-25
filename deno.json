@@ -1,0 +1,17 @@
+{
+  "tasks": {
+    "dev": "deno run --allow-env --allow-net --allow-read --env src/main.ts",
+    "start": "deno run --allow-net --allow-ffi --allow-env --env main.ts"
+  },
+  "compilerOptions": {
+    "lib": ["deno.ns", "deno.window", "deno.worker"],
+    "strict": true
+  },
+  "nodeModulesDir": "auto",
+  "imports": {
+    "@stellar/stellar-sdk": "npm:@stellar/stellar-sdk@^14.0.0-rc.3",
+    "stellar-sdk": "npm:@stellar/stellar-sdk@^14.0.0-rc.3",
+    "buffer": "npm:buffer@^6.0.3",
+    "sac": "./bindings/src/index.ts"
+  }
+}
