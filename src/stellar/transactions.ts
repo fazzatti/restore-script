@@ -6,7 +6,8 @@ import {
   TransactionBuilder,
   xdr,
 } from "stellar-sdk";
-import { config, rpc } from "./config.ts";
+import { config, rpc } from "../config/config.ts";
+import { Api } from "stellar-sdk/rpc";
 
 export const restore = async (args: { keys: xdr.LedgerKey[] }) => {
   const sorobanData = new SorobanDataBuilder().setReadWrite(args.keys).build();

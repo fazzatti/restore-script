@@ -1,15 +1,18 @@
-import { xdr } from "stellar-sdk";
-import { getContractInstanceLedgerEntry } from "./getContractInstanceLedgerEntries.ts";
-import { extendTtl } from "./transaction.ts";
+import { loadEntries, processLedgerEntries } from "./stellar/process.ts";
+import { loadKeysFromCsv } from "./io/readFile.ts";
+import { writeEntriesToCsv } from "./io/writeFile.ts";
 
-getContractInstanceLedgerEntry();
+const args = Deno.args;
+const executeRestore = args[0] || false;
 
-const usdcTestnetInstanceKey =
-  "AAAABgAAAAFQRc1ewHKado/VrQJQWFLfTwKNzoMOWsUiCbpISDsvAQAAABQAAAAB";
+console.log(executeRestore ? "Executing restore..." : "Checking keys...");
 
-const result = await extendTtl({
-  keys: [xdr.LedgerKey.fromXDR(usdcTestnetInstanceKey, "base64")],
-  extendTo: 2000000,
-});
+const entries = await loadKeysFromCsv();
+await loadEntries(entries, !executeRestore);
 
-console.log("Extend TTL operation completed successfully:", result);
+if (executeRestore) {
+  console.log("Processing ledger entries...");
+  await processLedgerEntries(entries);
+}
+
+await writeEntriesToCsv(entries);
