@@ -5,7 +5,11 @@ import { writeEntriesToCsv } from "./io/writeFile.ts";
 const args = Deno.args;
 const executeRestore = args[0] || false;
 
-console.log(executeRestore ? "Executing restore..." : "Checking keys...");
+console.log(
+  executeRestore
+    ? "Executing restore / extend script..."
+    : "Checking entries..."
+);
 
 const entries = await loadKeysFromCsv();
 await loadEntries(entries, !executeRestore);

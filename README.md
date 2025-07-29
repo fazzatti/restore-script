@@ -16,6 +16,10 @@
    - Set your `STELLAR_SECRET_KEY` with the account to be used as the source for the transactions
    - Configure `NETWORK` (testnet, mainnet, futurenet, etc.)
    - Set `STELLAR_RPC_URL` for your chosen network
+   - Modify the following parameters to adjust the transactions and logic:
+     - `BASE_FEE` : The base fee in stroops ( 1 stroop = 0.0000001 XLM )
+     - `TTL_THRESHOLD`: Any entry with a TTL set to expire in this many ledgers, will be have it extended.
+     - `EXTEND_TTL_BY`: When extending an entry TTL, it will be for this many ledgers from now. (1 ledger = ~5 sec)
 
 ## Usage
 

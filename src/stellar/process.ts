@@ -18,7 +18,7 @@ export const processLedgerEntries = async (entries: Entry[]) => {
     if (entry.getStatus() === EntryStatus.PendingExtend) {
       const resultExtend = await extendTtl({
         keys: [entry.getKey()],
-        extendTo: config.extendTtlTo,
+        extendTo: config.extendTtlBy,
       });
 
       console.log("Extend TTL operation completed successfully:", resultExtend);

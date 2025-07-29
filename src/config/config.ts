@@ -15,6 +15,7 @@ export interface Config {
   ttlThresholdLedgerSeq: number;
   extendTtlBy: number;
   extendTtlTo: number;
+  latestLedger: number;
 }
 
 /**
@@ -68,6 +69,7 @@ export const config: Config = {
   extendTtlBy,
   extendTtlTo: latestLedgerSequence + extendTtlBy,
   ttlThresholdLedgerSeq: latestLedgerSequence + ttlThreshold,
+  latestLedger: latestLedgerSequence,
 };
 
 // Log the loaded configuration

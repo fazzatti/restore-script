@@ -45,7 +45,11 @@ export class Entry {
       );
     }
 
-    const isEntryArchived = ledgerEntry.entries[0].liveUntilLedgerSeq === 0;
+    const isEntryArchived =
+      ledgerEntry.entries[0].liveUntilLedgerSeq === 0 ||
+      (ledgerEntry.entries[0].liveUntilLedgerSeq &&
+        ledgerEntry.entries[0].liveUntilLedgerSeq <
+          Number(config.latestLedger));
 
     if (isEntryArchived) {
       this.status = EntryStatus.Archived;

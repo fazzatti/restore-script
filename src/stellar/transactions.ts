@@ -84,7 +84,6 @@ const executeTransaction = async ({
   simulatedTx.sign(sourceKeypair);
 
   try {
-    console.log("Sending transaction:", simulatedTx.toXDR());
     const response = await rpc.sendTransaction(simulatedTx);
     const status = await rpc.pollTransaction(response.hash, {
       attempts: 20,
