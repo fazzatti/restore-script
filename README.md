@@ -19,14 +19,14 @@
 
 ## Usage
 
-### Development (with file watching)
+To load the entries state and output a CSV with their statuses based on the parameters, run the following command. This won't submit any transactions as it is meant to just check on the up-to-date state for the entries.
 
 ```bash
-deno task dev
+deno task check
 ```
 
-### Production
+To trigger the sequential execution of the restore and extend transactions, run the following command. An output CSV is provided at the end with the updated status for the entries.
 
 ```bash
-deno task start
+deno task run
 ```
