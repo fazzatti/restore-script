@@ -72,7 +72,7 @@ const executeTransaction = async ({
   }
 
   txEnvelope.addOperation(operation);
-  const builtTx = txEnvelope.setTimeout(300).build();
+  const builtTx = txEnvelope.setTimeout(0).build();
 
   let simulatedTx;
   try {
@@ -84,9 +84,10 @@ const executeTransaction = async ({
   simulatedTx.sign(sourceKeypair);
 
   try {
+    console.log("Sending transaction:", simulatedTx.toXDR());
     const response = await rpc.sendTransaction(simulatedTx);
     const status = await rpc.pollTransaction(response.hash, {
-      attempts: 10,
+      attempts: 20,
     });
 
     return { hash: response.hash, status: status.status };

@@ -75,7 +75,9 @@ console.log(`\n------------------------------------------------------------`);
 console.log(`Using Stellar Network: ${config.stellarNetwork}`);
 console.log(`RPC URL: ${config.stellarRpcUrl}`);
 console.log(`Account Public Key: ${config.accountKeypair.publicKey()}`);
-console.log(`Base Fee: ${config.fee} stroops`);
+console.log(
+  `Base Fee: ${Number(config.fee) / 10000000} XLM (${config.fee} stroops)`
+);
 console.log(`TTL Threshold: ${config.ttlThreshold}`);
 console.log(`Extend TTL By: ${config.extendTtlBy}`);
 console.log(`Extend TTL To: ${config.extendTtlTo}`);
