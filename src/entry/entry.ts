@@ -15,6 +15,27 @@ export class Entry {
   constructor(keyXdr: string) {
     try {
       this.key = xdr.LedgerKey.fromXDR(keyXdr, "base64");
+    } catch (error) {
+      console.log(
+        `Failed to parse LedgerKey from XDR[${keyXdr}]: ${xdr.LedgerKeyContractData.fromXDR(
+          keyXdr,
+          "base64"
+        )}`
+      );
+
+      this.key = xdr.LedgerKey.contractData(
+        xdr.LedgerKeyContractData.fromXDR(keyXdr, "base64")
+      );
+      console.log(`Using fallback LedgerKey: ${this.key.toXDR("base64")}`);
+    }
+    try {
+      this.status = EntryStatus.Unverified;
+    } catch (error) {
+      throw new Error(
+        `Failed to parse LedgerKey from XDR[${keyXdr}]: ${error}`
+      );
+    }
+    try {
       this.status = EntryStatus.Unverified;
     } catch (error) {
       throw new Error(
