@@ -12,6 +12,7 @@ export enum EntryStatus {
 export class Entry {
   private key: xdr.LedgerKey;
   private status: EntryStatus;
+  private ttl: undefined | number;
   constructor(keyXdr: string) {
     try {
       this.key = xdr.LedgerKey.fromXDR(keyXdr, "base64");
@@ -66,6 +67,8 @@ export class Entry {
       );
     }
 
+    this.ttl = ledgerEntry.entries[0].liveUntilLedgerSeq;
+
     const isEntryArchived =
       ledgerEntry.entries[0].liveUntilLedgerSeq === 0 ||
       (ledgerEntry.entries[0].liveUntilLedgerSeq &&
@@ -90,5 +93,9 @@ export class Entry {
 
     this.status = EntryStatus.ExtensionCompleted;
     return this.status;
+  }
+
+  public getTtl(): number | undefined {
+    return this.ttl;
   }
 }

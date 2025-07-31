@@ -6,16 +6,17 @@ export const writeEntriesToCsv = async (
 ): Promise<void> => {
   try {
     // Create CSV header
-    const csvHeader = "key_xdr,status\n";
+    const csvHeader = "key_xdr,status,ttl\n";
 
     // Create CSV rows
     const csvRows = entries
       .map((entry) => {
         const keyXdr = entry.getKey().toXDR("base64");
         const status = entry.getStatus();
+        const ttl = entry.getTtl();
 
         // Wrap XDR in quotes to handle any special characters
-        return `"${keyXdr}",${status}`;
+        return `"${keyXdr}",${status},${ttl ?? "undefined"}`;
       })
       .join("\n");
 
