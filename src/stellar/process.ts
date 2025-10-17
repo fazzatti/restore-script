@@ -8,6 +8,8 @@ export const processLedgerEntries = async (entries: Entry[]) => {
     if (entry.getStatus() === EntryStatus.Archived) {
       const resultRestore = await restore({
         keys: [entry.getKey()],
+      }).catch((_error) => {
+        console.error(`Entry ${entry.getKey().toXDR("base64")} restore failed`);
       });
 
       console.log("Restore operation completed successfully:", resultRestore);
@@ -19,6 +21,8 @@ export const processLedgerEntries = async (entries: Entry[]) => {
       const resultExtend = await extendTtl({
         keys: [entry.getKey()],
         extendTo: config.extendTtlBy,
+      }).catch((_error) => {
+        console.error(`Entry ${entry.getKey().toXDR("base64")} extend failed`);
       });
 
       console.log("Extend TTL operation completed successfully:", resultExtend);

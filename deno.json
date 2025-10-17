@@ -1,7 +1,9 @@
 {
   "tasks": {
-    "check": "deno run --allow-env --allow-net --allow-read --allow-write --allow-ffi --env src/main.ts",
-    "run": "deno run --allow-env --allow-net --allow-read --allow-write --allow-ffi --env src/main.ts --true"
+    "check:csv": "deno run --allow-env --allow-net --allow-read --allow-write --allow-ffi --env src/process-csv.ts",
+    "run:csv": "deno run --allow-env --allow-net --allow-read --allow-write --allow-ffi --env src/process-csv.ts --true",
+    "check": "deno run --allow-env --allow-net --allow-read --allow-write --allow-ffi --env src/process.ts ",
+    "run": "deno run --allow-env --allow-net --allow-read --allow-write --allow-ffi --env src/process.ts --true"
   },
   "compilerOptions": {
     "lib": ["deno.ns", "deno.window", "deno.worker"],

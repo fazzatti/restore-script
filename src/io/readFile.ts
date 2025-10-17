@@ -88,7 +88,7 @@ export const loadKeysFromCsv = async (
   }
 };
 
-const parseLedgerKey = async (entry: CsvEntry): Promise<string> => {
+export const parseLedgerKey = async (entry: CsvEntry): Promise<string> => {
   switch (entry.keyType) {
     case "ScValTypeScvVec":
       return xdr.LedgerKey.contractData(
