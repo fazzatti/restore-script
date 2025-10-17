@@ -1,7 +1,5 @@
 # Restore Script
 
-# Restore Script
-
 ## Requirements
 
 - [Deno](https://deno.land/) - Modern runtime for JavaScript and TypeScript
