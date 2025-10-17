@@ -16,6 +16,7 @@ export interface Config {
   extendTtlBy: number;
   extendTtlTo: number;
   latestLedger: number;
+  contractId?: string;
 }
 
 /**
@@ -52,6 +53,7 @@ const fee = getRequiredEnv("BASE_FEE") || "100"; // Default fee if not set
 const ttlThreshold = parseInt(getRequiredEnv("TTL_THRESHOLD"), 10) || 100;
 const extendTtlBy = parseInt(getRequiredEnv("EXTEND_TTL_BY"), 10) || 1000;
 const stellarRpcUrl = getRequiredEnv("STELLAR_RPC_URL");
+const contractId = Deno.env.get("CONTRACT_ID") || undefined;
 
 // Export a singleton config instance
 
@@ -70,6 +72,7 @@ export const config: Config = {
   extendTtlTo: latestLedgerSequence + extendTtlBy,
   ttlThresholdLedgerSeq: latestLedgerSequence + ttlThreshold,
   latestLedger: latestLedgerSequence,
+  contractId,
 };
 
 // Log the loaded configuration
@@ -83,4 +86,8 @@ console.log(
 console.log(`TTL Threshold: ${config.ttlThreshold}`);
 console.log(`Extend TTL By: ${config.extendTtlBy}`);
 console.log(`Extend TTL To: ${config.extendTtlTo}`);
+console.log(`Latest Ledger Sequence: ${config.latestLedger}`);
+if (config.contractId) {
+  console.log(`Contract ID: ${config.contractId}`);
+}
 console.log(`------------------------------------------------------------\n`);
